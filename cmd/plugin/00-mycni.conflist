@@ -1,13 +1,13 @@
 {
-  "name": "cbr0",
+  "name": "mycni0",
   "cniVersion": "0.3.1",
   "plugins": [
-    "type": "mycni",
-    "ipam": {
-      "type": "host-local",
-      "subnet": "10.244.0.0/24",
-      "rangeStart": "",
-      "rangeEnd": ""
+    {
+      "type": "mycni",
+      "ipam": {
+        "type": "host-local",
+        "subnet": "10.244.0.0/24"
+      }
     }
   ]
 }

@@ -16,6 +16,7 @@ rules:
     verbs:
       - list
       - watch
+      - patch
   - apiGroups:
       - ""
     resources:
@@ -96,3 +97,10 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.namespace
+          volumeMounts:
+          - name: cni-conf
+            mountPath: /etc/cni/net.d
+      volumes:
+      - name: cni-conf
+        hostPath:
+          path: /etc/cni/net.d

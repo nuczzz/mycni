@@ -114,7 +114,7 @@ func cmdAdd(args *skel.CmdArgs) error {
 		ip.Gateway = nil
 	}
 
-	if err = result.Print(); err!= nil {
+	if err = result.Print(); err != nil {
 		log.Debugf("result Print error: %s", err.Error())
 		return err
 	}
@@ -240,14 +240,18 @@ func applyIP(conf *MyCNIConfig) (types.Result, error) {
 		return nil, errors.Wrapf(err, "ParseCIDR error")
 	}
 
-	startIP := net.ParseIP(conf.IPAM.RangeStart)
-	if startIP == nil {
-		return nil, errors.Errorf("range start %s error", conf.IPAM.RangeStart)
+	var startIP, endIP net.IP
+	if conf.IPAM.RangeStart != "" {
+		startIP = net.ParseIP(conf.IPAM.RangeStart)
+		if startIP == nil {
+			return nil, errors.Errorf("range start %s error", conf.IPAM.RangeStart)
+		}
 	}
-
-	endIP := net.ParseIP(conf.IPAM.RangeEnd)
-	if endIP == nil {
-		return nil, errors.Errorf("range end %s error", conf.IPAM.RangeEnd)
+	if conf.IPAM.RangeEnd != "" {
+		endIP = net.ParseIP(conf.IPAM.RangeEnd)
+		if endIP == nil {
+			return nil, errors.Errorf("range end %s error", conf.IPAM.RangeEnd)
+		}
 	}
 
 	ipamConf := allocator.Net{

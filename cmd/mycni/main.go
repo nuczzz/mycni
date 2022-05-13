@@ -38,6 +38,11 @@ func main() {
 	}
 	klog.Infof("GetCurrentNode success")
 
+	if err = pkg.InitCNIPluginConfigFile(node.Spec.PodCIDR); err != nil {
+		klog.Fatalf("InitCNIPluginConfigFile error: %s", err.Error())
+	}
+	klog.Infof("InitCNIPluginConfigFile success")
+
 	vxlanDevice, err := initVxlanDevice(node.Spec.PodCIDR)
 	if err != nil {
 		klog.Fatalf("initVxlanDevice error: %s", err.Error())
