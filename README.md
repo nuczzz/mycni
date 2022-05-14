@@ -623,7 +623,7 @@ daemonSet pod职责：
 
 完整的示例代码我放在了github上：[https://github.com/nuczzz/mycni](https://github.com/nuczzz/mycni)，有兴趣的读者可以参考着实践一下，目录如下：
 
-【图】
+![](pic/cni-dir.png)
 
 cmd/plugin对应的是上一章节提到的CNI插件入口，cmd/mycni则是对应daemonSet pod逻辑入口。CNI插件编译成可执行程序放到每个节点的/opt/cni/bin目录下即可（记得把IPAM插件host-local也放到该目录），对应的配置文件我在daemonSet pod逻辑中做了处理，会自动在/etc/cni/net.d下生成配置文件：
 ```go
